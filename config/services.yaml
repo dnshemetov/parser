@@ -20,5 +20,14 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # all classes in App\Import Rule will be automatically picked up as rules
+    App\ImportRule\:
+        resource: '../src/ImportRule/*'
+        tags: ['app.import_rule']
+
+    App\Service\ProductImporter:
+        arguments:
+            $rules: !tagged_iterator app.import_rule
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
