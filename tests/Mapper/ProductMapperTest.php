@@ -13,7 +13,7 @@ class ProductMapperTest extends TestCase
         $record = [
             'Product Code' => ' P0001 ',
             'Product Name' => ' 32” TV ',
-            // description в Windows-1252 для проверки перекодировки
+            // description in Windows-1252 to check the conversion
             'Product Description' => iconv('UTF-8', 'Windows-1252', '32” Tv'),
             'Stock' => ' 10 ',
             'Cost in GBP' => ' £199.99 ',
@@ -23,7 +23,6 @@ class ProductMapperTest extends TestCase
         /** @var ProductDto $dto */
         $dto = ProductMapper::fromRecord($record);
 
-        // Проверяем все поля
         $this->assertInstanceOf(ProductDto::class, $dto);
 
         $this->assertSame('P0001', $dto->code, 'Code should be trimmed');
